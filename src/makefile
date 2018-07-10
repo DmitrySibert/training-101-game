@@ -1,8 +1,17 @@
+.PHONY : clean
 
-sample: main.o SimpleCardDeck.o
-		g++ -std=c++11 -o game.out *.o
+CC=g++
+
+CFLAGS=-std=c++11 -Wall -c
+
+target: main.o SimpleCardDeck.o
+	$(CC) -o game.out *.o
 
 main.o: main.cpp
-		g++ -std=c++11 -c main.cpp -I core
-SimpleCardDeck.o: 
-		g++ -std=c++11 -c core/*.cpp
+	$(CC) $(CFLAGS) main.cpp -I core
+
+SimpleCardDeck.o:
+	$(CC) $(CFLAGS) core/*.cpp
+
+clean:
+	rm -rf *.o
